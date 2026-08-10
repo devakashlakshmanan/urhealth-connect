@@ -183,13 +183,13 @@ function CommandCenter() {
           <div className="mt-4 h-64">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
-                <XAxis dataKey="t" tick={{ fontSize: 11 }} stroke="var(--color-muted-foreground)" />
-                <YAxis tick={{ fontSize: 11 }} stroke="var(--color-muted-foreground)" />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                <XAxis dataKey="t" tick={{ fontSize: 11 }} stroke="var(--muted-foreground)" />
+                <YAxis tick={{ fontSize: 11 }} stroke="var(--muted-foreground)" />
                 <Tooltip
                   contentStyle={{
-                    background: "var(--color-card)",
-                    border: "1px solid var(--color-border)",
+                    background: "var(--card)",
+                    border: "1px solid var(--border)",
                     borderRadius: 8,
                     fontSize: 12,
                   }}
@@ -199,8 +199,8 @@ function CommandCenter() {
                     key={h.id}
                     type="monotone"
                     dataKey={h.name}
-                    stroke={`var(--color-chart-${i + 1})`}
-                    fill={`var(--color-chart-${i + 1})`}
+                    stroke={`var(--chart-${i + 1})`}
+                    fill={`var(--chart-${i + 1})`}
                     fillOpacity={0.12}
                     strokeWidth={2}
                   />

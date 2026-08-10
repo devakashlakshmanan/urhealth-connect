@@ -52,10 +52,13 @@ export function useNetworkChannel(onEvent?: (e: NetworkEvent) => void) {
   const qc = useQueryClient();
   useEffect(() => {
     startBackgroundJobs();
-    return subscribeNetwork((e) => {
+    const unsubscribe = subscribeNetwork((e) => {
       qc.invalidateQueries();
       onEvent?.(e);
     });
+    return () => {
+      unsubscribe();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [qc]);
 }

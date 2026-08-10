@@ -326,6 +326,7 @@ export const store = {
       publish({ type: "patient_updated", patient: { ...patient } });
     }
     refreshPredictions();
+    persist();
   },
 
   rejectHold(holdId: string) {
@@ -351,6 +352,7 @@ export const store = {
       p.status = "en_route";
       publish({ type: "patient_updated", patient: { ...p } });
     }
+    persist();
   },
 
   updateResources(hospitalId: string, patch: Partial<Hospital>) {

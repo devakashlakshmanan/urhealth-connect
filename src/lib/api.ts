@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { startBackgroundJobs, store, subscribeNetwork, type NetworkEvent } from "./mock-backend";
+import { hydrate, startBackgroundJobs, store, subscribeNetwork, type NetworkEvent } from "./mock-backend";
 import type { Hospital, Incident, Severity } from "./types";
 
 /**
@@ -8,6 +8,8 @@ import type { Hospital, Incident, Severity } from "./types";
  * To go live, replace each body with fetch("/api/...") — signatures already
  * match the FastAPI contract, and useNetworkChannel maps to WS /ws/network.
  */
+
+if (typeof window !== "undefined") hydrate();
 
 const delay = <T,>(v: T, ms = 180) => new Promise<T>((r) => setTimeout(() => r(v), ms));
 

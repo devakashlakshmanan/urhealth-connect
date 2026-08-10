@@ -10,11 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CommandCenterRouteImport } from './routes/command-center'
+import { Route as HospitalHospitalIdRouteImport } from './routes/hospital.$hospitalId'
 import { Route as TriageNewRouteImport } from './routes/triage.new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommandCenterRoute = CommandCenterRouteImport.update({
+  id: '/command-center',
+  path: '/command-center',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HospitalHospitalIdRoute = HospitalHospitalIdRouteImport.update({
+  id: '/hospital/$hospitalId',
+  path: '/hospital/$hospitalId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TriageNewRoute = TriageNewRouteImport.update({
@@ -25,27 +37,40 @@ const TriageNewRoute = TriageNewRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/command-center': typeof CommandCenterRoute
+  '/hospital/$hospitalId': typeof HospitalHospitalIdRoute
   '/triage/new': typeof TriageNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/command-center': typeof CommandCenterRoute
+  '/hospital/$hospitalId': typeof HospitalHospitalIdRoute
   '/triage/new': typeof TriageNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/command-center': typeof CommandCenterRoute
+  '/hospital/$hospitalId': typeof HospitalHospitalIdRoute
   '/triage/new': typeof TriageNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/triage/new'
+  fullPaths: '/' | '/command-center' | '/hospital/$hospitalId' | '/triage/new'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/triage/new'
-  id: '__root__' | '/' | '/triage/new'
+  to: '/' | '/command-center' | '/hospital/$hospitalId' | '/triage/new'
+  id:
+    | '__root__'
+    | '/'
+    | '/command-center'
+    | '/hospital/$hospitalId'
+    | '/triage/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CommandCenterRoute: typeof CommandCenterRoute
+  HospitalHospitalIdRoute: typeof HospitalHospitalIdRoute
   TriageNewRoute: typeof TriageNewRoute
 }
 
@@ -56,6 +81,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/command-center': {
+      id: '/command-center'
+      path: '/command-center'
+      fullPath: '/command-center'
+      preLoaderRoute: typeof CommandCenterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hospital/$hospitalId': {
+      id: '/hospital/$hospitalId'
+      path: '/hospital/$hospitalId'
+      fullPath: '/hospital/$hospitalId'
+      preLoaderRoute: typeof HospitalHospitalIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/triage/new': {
@@ -70,6 +109,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CommandCenterRoute: CommandCenterRoute,
+  HospitalHospitalIdRoute: HospitalHospitalIdRoute,
   TriageNewRoute: TriageNewRoute,
 }
 export const routeTree = rootRouteImport

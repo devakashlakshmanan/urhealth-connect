@@ -199,7 +199,6 @@ function CommandCenter() {
                     key={h.id}
                     type="monotone"
                     dataKey={h.name}
-                    stackId={undefined}
                     stroke={`var(--color-chart-${i + 1})`}
                     fill={`var(--color-chart-${i + 1})`}
                     fillOpacity={0.12}

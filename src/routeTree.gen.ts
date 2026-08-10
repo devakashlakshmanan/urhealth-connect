@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CommandCenterRouteImport } from './routes/command-center'
 import { Route as AmbulanceUnitIdRouteImport } from './routes/ambulance.$unitId'
 import { Route as HospitalHospitalIdRouteImport } from './routes/hospital.$hospitalId'
+import { Route as ReunifyIndexRouteImport } from './routes/reunify.index'
+import { Route as ReunifyTrackingIdRouteImport } from './routes/reunify.$trackingId'
 import { Route as TriageNewRouteImport } from './routes/triage.new'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,6 +37,16 @@ const HospitalHospitalIdRoute = HospitalHospitalIdRouteImport.update({
   path: '/hospital/$hospitalId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReunifyIndexRoute = ReunifyIndexRouteImport.update({
+  id: '/reunify/',
+  path: '/reunify/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReunifyTrackingIdRoute = ReunifyTrackingIdRouteImport.update({
+  id: '/reunify/$trackingId',
+  path: '/reunify/$trackingId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TriageNewRoute = TriageNewRouteImport.update({
   id: '/triage/new',
   path: '/triage/new',
@@ -46,14 +58,18 @@ export interface FileRoutesByFullPath {
   '/command-center': typeof CommandCenterRoute
   '/ambulance/$unitId': typeof AmbulanceUnitIdRoute
   '/hospital/$hospitalId': typeof HospitalHospitalIdRoute
+  '/reunify/$trackingId': typeof ReunifyTrackingIdRoute
   '/triage/new': typeof TriageNewRoute
+  '/reunify/': typeof ReunifyIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/command-center': typeof CommandCenterRoute
   '/ambulance/$unitId': typeof AmbulanceUnitIdRoute
   '/hospital/$hospitalId': typeof HospitalHospitalIdRoute
+  '/reunify/$trackingId': typeof ReunifyTrackingIdRoute
   '/triage/new': typeof TriageNewRoute
+  '/reunify': typeof ReunifyIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -61,7 +77,9 @@ export interface FileRoutesById {
   '/command-center': typeof CommandCenterRoute
   '/ambulance/$unitId': typeof AmbulanceUnitIdRoute
   '/hospital/$hospitalId': typeof HospitalHospitalIdRoute
+  '/reunify/$trackingId': typeof ReunifyTrackingIdRoute
   '/triage/new': typeof TriageNewRoute
+  '/reunify/': typeof ReunifyIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -70,21 +88,27 @@ export interface FileRouteTypes {
     | '/command-center'
     | '/ambulance/$unitId'
     | '/hospital/$hospitalId'
+    | '/reunify/$trackingId'
     | '/triage/new'
+    | '/reunify/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/command-center'
     | '/ambulance/$unitId'
     | '/hospital/$hospitalId'
+    | '/reunify/$trackingId'
     | '/triage/new'
+    | '/reunify'
   id:
     | '__root__'
     | '/'
     | '/command-center'
     | '/ambulance/$unitId'
     | '/hospital/$hospitalId'
+    | '/reunify/$trackingId'
     | '/triage/new'
+    | '/reunify/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -92,7 +116,9 @@ export interface RootRouteChildren {
   CommandCenterRoute: typeof CommandCenterRoute
   AmbulanceUnitIdRoute: typeof AmbulanceUnitIdRoute
   HospitalHospitalIdRoute: typeof HospitalHospitalIdRoute
+  ReunifyTrackingIdRoute: typeof ReunifyTrackingIdRoute
   TriageNewRoute: typeof TriageNewRoute
+  ReunifyIndexRoute: typeof ReunifyIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -125,6 +151,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HospitalHospitalIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reunify/': {
+      id: '/reunify/'
+      path: '/reunify'
+      fullPath: '/reunify/'
+      preLoaderRoute: typeof ReunifyIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reunify/$trackingId': {
+      id: '/reunify/$trackingId'
+      path: '/reunify/$trackingId'
+      fullPath: '/reunify/$trackingId'
+      preLoaderRoute: typeof ReunifyTrackingIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/triage/new': {
       id: '/triage/new'
       path: '/triage/new'
@@ -140,7 +180,9 @@ const rootRouteChildren: RootRouteChildren = {
   CommandCenterRoute: CommandCenterRoute,
   AmbulanceUnitIdRoute: AmbulanceUnitIdRoute,
   HospitalHospitalIdRoute: HospitalHospitalIdRoute,
+  ReunifyTrackingIdRoute: ReunifyTrackingIdRoute,
   TriageNewRoute: TriageNewRoute,
+  ReunifyIndexRoute: ReunifyIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

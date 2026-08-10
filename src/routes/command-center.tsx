@@ -91,7 +91,7 @@ function CommandCenter() {
         <StatCard label="Active holds" value={activeHolds.length} hint="Golden Hour locks in force" />
       </div>
 
-      {incidents.length ? (
+      {incidents[0] ? (
         <div className="panel mt-6 flex items-start gap-3 border-l-4 border-l-critical p-4">
           <span className="pulse-dot mt-1.5 block h-2 w-2 shrink-0 rounded-full bg-critical text-critical" />
           <div className="min-w-0">

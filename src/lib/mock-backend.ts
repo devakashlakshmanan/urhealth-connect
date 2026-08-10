@@ -99,7 +99,32 @@ export function subscribeNetwork(fn: (e: NetworkEvent) => void) {
   return () => listeners.delete(fn);
 }
 
+const STORAGE_KEY = "urhealth-demo-state";
+
+/** Session persistence so a full page reload keeps the demo scenario intact. */
+export function persist() {
+  if (typeof window === "undefined") return;
+  try {
+    window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+  } catch {
+    /* storage unavailable — demo continues in memory */
+  }
+}
+
+export function hydrate() {
+  if (typeof window === "undefined") return;
+  try {
+    const raw = window.sessionStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const parsed = JSON.parse(raw) as Snapshot;
+    Object.assign(db, parsed);
+  } catch {
+    /* ignore malformed state */
+  }
+}
+
 function publish(e: NetworkEvent) {
+  persist();
   listeners.forEach((l) => l(e));
 }
 

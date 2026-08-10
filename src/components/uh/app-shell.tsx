@@ -19,8 +19,8 @@ export function AppShell({
 }: {
   role: string;
   title: string;
-  subtitle?: string;
-  actions?: ReactNode;
+  subtitle?: string | undefined;
+  actions?: ReactNode | undefined;
   children: ReactNode;
 }) {
   return (

@@ -1,4 +1,4 @@
-# UrHealth Connect
+# UrHealth Platform
 
 Smart Emergency Orchestration & Family Re-Unification System
 
